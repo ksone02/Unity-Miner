@@ -31,17 +31,17 @@ public class CameraControl : MonoBehaviour
     void Update()
     {
         float scroll = -Input.GetAxis("Mouse ScrollWheel") * ZoomSpeed;
-        if (thisCamera.fieldOfView >= 120 && scroll > 0)
+        if (thisCamera.orthographicSize >= 8 && scroll > 0)
         {
-            thisCamera.fieldOfView = 120;
+            thisCamera.orthographicSize = 8;
         }
-        else if (thisCamera.fieldOfView <= 40 && scroll < 0)
+        else if (thisCamera.orthographicSize <= 4 && scroll < 0)
         {
-            thisCamera.fieldOfView = 40;
+            thisCamera.orthographicSize = 4;
         }
         else
         {
-            thisCamera.fieldOfView += scroll;
+            thisCamera.orthographicSize += scroll;
         }
     }
 }
