@@ -20,6 +20,8 @@ public class BlockCave : MonoBehaviour
 
     Animator anim;
 
+    public GameObject dropBlock;
+
     void Start()
     {
         sr = gameObject.GetComponent<SpriteRenderer>();
@@ -34,7 +36,6 @@ public class BlockCave : MonoBehaviour
             distanceOk = true;
             if (Input.GetMouseButton(0))
             {
-                Debug.Log("clickTest");
                 Vector2 touchPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
                 rayHit = Physics2D.Raycast(touchPos, mainCamera.transform.forward);
                 CastRay();
@@ -43,16 +44,16 @@ public class BlockCave : MonoBehaviour
                 {
                     timeSpan += Time.deltaTime;
                     anim.SetBool("isClick", true);
-                    Debug.Log(target + " test " + target.transform.position);
 
                     if (timeSpan > time)
                     {
-                        Destroy(this.gameObject);
                         timeSpan = 0;
+                        DropBlock();
                         if (newPoint)
                         {
                             Destroy(newPoint);
                         }
+                        Destroy(this.gameObject);
                     }
                 }
                 else
@@ -93,13 +94,18 @@ public class BlockCave : MonoBehaviour
         {
             Vector3 pointerPosition = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, -1);
             newPoint = Instantiate(pointer, pointerPosition, Quaternion.identity) as GameObject;
-            Debug.Log("onMouseEnter");
         }
     }
 
     void OnMouseExit()
     {
         Destroy(newPoint);
-        Debug.Log("onMouseExit");
+    }
+
+    void DropBlock()
+    {
+        int random = Random.Range(0, 360);
+        var r = Quaternion.Euler(0f, 0f, random);
+        GameObject drBlock = Instantiate(dropBlock, this.gameObject.transform.position, r) as GameObject;
     }
 }

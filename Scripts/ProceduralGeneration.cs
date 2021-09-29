@@ -7,8 +7,8 @@ public class ProceduralGeneration : MonoBehaviour
     public GameObject blockObject;
     public GameObject player;
 
-    private int worldSizeX = 16;
-    private int worldSizeY = 16;
+    private int worldSizeX = 24;
+    private int worldSizeY = 24;
 
     private Vector2 startPosition;
 
@@ -17,9 +17,9 @@ public class ProceduralGeneration : MonoBehaviour
 
     void Start()
     {
-        for (int x = -16; x <= 16; x++)
+        for (int x = -8; x <= 8; x++)
         {
-            for (int y = -16; y <= 16; y++)
+            for (int y = -8; y <= 8; y++)
             {
                 Vector3 startPos = new Vector3(x, y, 0);
 
@@ -31,7 +31,7 @@ public class ProceduralGeneration : MonoBehaviour
 
     void Update()
     {
-        if (Mathf.Abs(xPlayerMove) >= 8 || Mathf.Abs(yPlayerMove) >= 8)
+        if (Mathf.Abs(xPlayerMove) >= 0 || Mathf.Abs(yPlayerMove) >= 0)
         {
             for (int x = -worldSizeX; x <= worldSizeX; x++)
             {
